@@ -13,7 +13,6 @@ terraform {
       client_id = "c9c59e08-342f-4f89-bdc6-2c7820d4e70b"
       client_secret = "Qah8Q~HFARjQl27eHAPDn2dUQzCW3dIbC_xT~c9T"
       tenant_id = "fdd345f9-103a-4dcf-8685-4bde04046f0c"
-      features {}
     }
     locals={
       resource_group="app-grp"
