@@ -15,11 +15,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3.1.0
-        working-directory:cd ./AKS/Azure_AKS_Labs/workflows/
+        working-directory: cd ./AKS/Azure_AKS_Labs/workflows/
         
       - name: 'Az CLI login'
         uses: azure/login@v1
-        working-directory:cd ./AKS/Azure_AKS_Labs/workflows/
+        working-directory: cd ./AKS/Azure_AKS_Labs/workflows/
         with:
           client-id: ${{ c9c59e08-342f-4f89-bdc6-2c7820d4e70b }}
           tenant-id: ${{ fdd345f9-103a-4dcf-8685-4bde04046f0c }}
@@ -27,7 +27,7 @@ jobs:
   
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2.0.2
-        working-directory:cd ./AKS/Azure_AKS_Labs/workflows/
+        working-directory: cd ./AKS/Azure_AKS_Labs/workflows/
         with:
           terraform_version: latest
           cli_config_credentials_token: ${{ VH2lGQlASgzITA.atlasv1.DfSVv8qa7SwABpudmJ45E0FzsAgNzTPae8r9DqQz3wPi6sBwWZ74Q6Ek18j2hWqNmN8 }}
@@ -35,14 +35,17 @@ jobs:
       - name: Terraform Init
         id: init
         run: terraform init
+        working-directory: cd ./AKS/Azure_AKS_Labs/workflows/
       
       - name: Terraform Validate
         id: validate
         run: terraform validate
+        working-directory: cd ./AKS/Azure_AKS_Labs/workflows/
 
       - name: Terraform Plan
         id: plan
         run: terraform plan
+        working-directory: cd ./AKS/Azure_AKS_Labs/workflows/
         continue-on-error: true
 
       - name: Terraform Plan Status
