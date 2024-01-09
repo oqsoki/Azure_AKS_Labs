@@ -32,22 +32,22 @@ jobs:
         id: init
         run: | 
               terraform init
-              cd ./AKS
-        working-directory: ./AKS/Azure_AKS_Labs/workflows/
+              cd Azure_AKS_Labs/AKS
+        working-directory: ./Azure_AKS_Labs/AKS/workflows/
       
       - name: Terraform Validate
         id: validate
         run: |
             terraform validate
-            cd ./AKS
-        working-directory: ./AKS/Azure_AKS_Labs/workflows/
+            cd cd Azure_AKS_Labs/AKS
+        working-directory: ./Azure_AKS_Labs/AKS/workflows/
 
       - name: Terraform Plan
         id: plan
         run: |
               terraform plan
-              cd ./AKS
-        working-directory: ./AKS/Azure_AKS_Labs/workflows/
+              cd cd Azure_AKS_Labs/AKS
+        working-directory: ./Azure_AKS_Labs/AKS/workflows/
         continue-on-error: true
 
       - name: Terraform Plan Status
