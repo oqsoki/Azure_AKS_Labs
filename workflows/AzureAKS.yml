@@ -2,10 +2,7 @@ name: Create Azure AKS With Terraform
 on:
   workflow_dispatch:
 
-permissions:
-      id-token: write
-      contents: read
-jobs: 
+jobs:
   AKS-Cluster-Deployment:
     runs-on: ubuntu-latest
     defaults:
@@ -13,45 +10,42 @@ jobs:
         shell: bash
     steps:
       - name: Checkout
-        uses: actions/checkout@v3.1.0
-        
+        uses: actions/checkout@v2
+
       - name: 'Az CLI login'
         uses: azure/login@v1
         with:
-          client-id: ${{ c9c59e08-342f-4f89-bdc6-2c7820d4e70b }}
-          tenant-id: ${{ fdd345f9-103a-4dcf-8685-4bde04046f0c }}
-          subscription-id: ${{ ee3b4c5c-9edb-42c3-a37b-2b5a65fd1c61 }}
-  
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          service-principal: true
+
       - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v2.0.2
+        uses: hashicorp/setup-terraform@v1
         with:
           terraform_version: latest
-          cli_config_credentials_token: ${{ VH2lGQlASgzITA.atlasv1.DfSVv8qa7SwABpudmJ45E0FzsAgNzTPae8r9DqQz3wPi6sBwWZ74Q6Ek18j2hWqNmN8 }}
 
       - name: Terraform Init
-         id: init
-         run: | 
-             cd Azure_AKS_Labs/AKS
-             terraform init
+        id: init
+        run: | 
+          cd Azure_AKS_Labs/AKS
+          terraform init
         working-directory: ./Azure_AKS_Labs/AKS/
 
-      
       - name: Terraform Validate
-         id: validate
-         run: |
-              cd Azure_AKS_Labs/AKS
-              terraform validate
+        id: validate
+        run: |
+          cd Azure_AKS_Labs/AKS
+          terraform validate
         working-directory: ./Azure_AKS_Labs/AKS/
-
 
       - name: Terraform Plan
         id: plan
         run: |
-            cd Azure_AKS_Labs/AKS
-            terraform plan
+          cd Azure_AKS_Labs/AKS
+          terraform plan
         working-directory: ./Azure_AKS_Labs/AKS/
         continue-on-error: true
-
 
       - name: Terraform Plan Status
         if: steps.plan.outcome == 'failure'
@@ -62,11 +56,3 @@ jobs:
 
       - name: Terraform Output
         run: terraform output
-
-      #- name: Deploy Application
-      #  run: |
-      #    az aks get-credentials -n "cluster-bursting-jennet" -g "rg-refined-swine"
-      #    kubectl apply -f ./AKSApp/aks-store-quickstart.yaml
-      #    sleep 40
-      #    kubectl get service store-front
-      #    rm -rf ~/.kube
