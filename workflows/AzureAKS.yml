@@ -29,11 +29,12 @@ jobs:
           cli_config_credentials_token: ${{ VH2lGQlASgzITA.atlasv1.DfSVv8qa7SwABpudmJ45E0FzsAgNzTPae8r9DqQz3wPi6sBwWZ74Q6Ek18j2hWqNmN8 }}
 
       - name: Terraform Init
-        id: init
-        run: | 
-              terraform init
-              cd Azure_AKS_Labs/AKS
+         id: init
+         run: | 
+             cd Azure_AKS_Labs/AKS
+             terraform init
         working-directory: ./Azure_AKS_Labs/AKS/
+
       
       - name: Terraform Validate
          id: validate
@@ -50,6 +51,7 @@ jobs:
             terraform plan
         working-directory: ./Azure_AKS_Labs/AKS/
         continue-on-error: true
+
 
       - name: Terraform Plan Status
         if: steps.plan.outcome == 'failure'
