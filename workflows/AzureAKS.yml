@@ -32,6 +32,7 @@ jobs:
             terraform init
         working-directory: ./Azure_AKS_Labs/AKS/
 
+
       - name: Terraform Validate
         id: validate
         run: |
