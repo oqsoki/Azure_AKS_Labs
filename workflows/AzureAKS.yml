@@ -36,17 +36,18 @@ jobs:
         working-directory: ./Azure_AKS_Labs/AKS/
       
       - name: Terraform Validate
-        id: validate
-        run: |
-            terraform validate
-            cd cd Azure_AKS_Labs/AKS
+         id: validate
+         run: |
+              cd Azure_AKS_Labs/AKS
+              terraform validate
         working-directory: ./Azure_AKS_Labs/AKS/
+
 
       - name: Terraform Plan
         id: plan
         run: |
-              terraform plan
-              cd cd Azure_AKS_Labs/AKS
+            cd Azure_AKS_Labs/AKS
+            terraform plan
         working-directory: ./Azure_AKS_Labs/AKS/
         continue-on-error: true
 
