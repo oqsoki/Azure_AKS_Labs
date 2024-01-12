@@ -30,8 +30,7 @@ jobs:
         run: | 
             cd Azure_AKS_Labs/AKS
             terraform init
-        working-directory: ./Azure_AKS_Labs/AKS/
-
+       working-directory: ./Azure_AKS_Labs/AKS/
 
       - name: Terraform Validate
         id: validate
